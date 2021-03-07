@@ -7,7 +7,7 @@ The website incorporates several HTML5, CSS, and Javascript skills including the
 
 ## Installation
 To view the repository as well as the actual webpage, please use the following link for access.
-https://bk7711.github.io/cbportfolio/ - C.B. Portfolio Site
+https://bk7711.github.io/onlineQuiz/ - Online Quiz Site
 
 Below is a preview of the html:
 
