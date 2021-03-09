@@ -16,7 +16,7 @@ var highscoresEl = document.querySelector(".highscores");
 var currentQuestion = 0;
 
 var secondsLeft = 90;
-var answers = [];
+
 var correctEl=0;
 var incorrectEl = 0;
 var scoreEl = 0;
@@ -28,52 +28,49 @@ startEl.addEventListener("click", function(){
         secondsLeft--;
         // timeEl.innerHTML = secondsLeft;
         document.getElementById("timer").innerHTML = secondsLeft;
-        if(secondsLeft === 0){
-            alert("Your time is up! Here is your score " + showResults);
+        if(secondsLeft <= 0){
+            alert(`Your time is up. Here is your score ${(correctEl/11)*100} % `);
             clearInterval(timerInterval);
         }
 
     }, 1000);
     startEl.setAttribute("style", "display:none");
     getQuestion();
-
+});
 
 //post a question
-    function getQuestion(){
-            var choiceEl;
-            var q = bank[currentQuestion];
-            questionsEl.innerHTML = "<p>" + bank[currentQuestion].question + "<p>";
-            choiceA.innerHTML = q.answers.a;
-            choiceA.addEventListener("click",choice);
-            choiceB.innerHTML = q.answers.b;
-            choiceB.addEventListener("click", choice);
-            choiceC.innerHTML = q.answers.c;
-            choiceC.addEventListener("click", choice);
-            choiceD.innerHTML = q.answers.d;
-            choiceD.addEventListener("click", choice);
-            answers.push = bank[currentQuestion].correctAnswer;
-
-        function choice(event){
-            if(event.target.id == answers.push){
-                correctEl++;
-                currentQuestion++;
-                resultEl.innerHTML = "Correct";
-                getQuestion();
-                
-            }else if(event.target.id !== answers.push){
-                    secondsLeft-=10;
-                    incorrectEl++;
-                    resultEl.innerHTML = "Wrong";
-                    currentQuestion++;
-                    getQuestion();
-            }else if(currentQuestion=== bank.length){
-                alert("Game over. Here is your score" + showResults);
-            }
-                
-        };
+function getQuestion(){
+    var q = bank[currentQuestion];
+    questionsEl.innerHTML = "<p>" + q.question + "<p>";
+    choiceA.innerHTML = q.answers.a;
+    choiceA.addEventListener("click",choice);
+    choiceB.innerHTML = q.answers.b;
+    choiceB.addEventListener("click", choice);
+    choiceC.innerHTML = q.answers.c;
+    choiceC.addEventListener("click", choice);
+    choiceD.innerHTML = q.answers.d;
+    choiceD.addEventListener("click", choice);
+        
+}
+function choice(event){
+    if(event.target.id == bank[currentQuestion].correctAnswer){
+        correctEl++;
+        currentQuestion++;
+        resultEl.innerHTML = "Correct";
+        console.log("correctEl",correctEl)
+        getQuestion();
+        
+    }else if(event.target.id !== bank[currentQuestion].correctAnswer){
+        secondsLeft-=10;
+        incorrectEl++;
+        resultEl.innerHTML = "Wrong";
+        currentQuestion++;
+        console.log("IncorrectEl",incorrectEl)
+        getQuestion();
+    }else if(currentQuestion > bank.length){
+        alert(`Game over. Here is your score ${(correctEl/11)*100} % `);
     }
-    });
-function showResults(){
-        correctEl.innerHTML = correctEl;
-        incorrectEl.innerHTML = incorrectEl;
-        scoreEl.innerHTML = "Your score is" + correctEl + "/"+ incorrectEl + "."}
+        
+};
+    
+  
