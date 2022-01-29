@@ -1,8 +1,8 @@
-nav{ 
-}
-#scoreKeeper{
+
+/* #scoreKeeper{
     display:none;
-}
+} */
+/* highscores link */
 .top{
     display:flex;
     flex-direction: row;
@@ -13,6 +13,7 @@ nav{
 li{
     list-style-type: none;
 }
+/* styling for quiz questions */
 #questions{
     font-size: 1.5rem;
     font-weight:5px;
@@ -55,12 +56,13 @@ button{
 button:hover{
     background-color: purple;
 }
+/* styling for user feedback */
 #result{
     font-size: 1rem;
     color:green;
     font-weight:bold;
 }
-
+/* styling for highscores table */
 .displayHighScores{
     display:none;
     text-align: center;
