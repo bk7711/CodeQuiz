@@ -31,14 +31,17 @@
             <div id = "choices">
                 <div class = "choice" id = "a">Answer the questions correctly to gain points.</div>
                 <div class = "choice" id = "b">You have 90 seconds to complete the quiz.</div>
-                <div class = "choice" id = "c">Every incorrect answer will lose 10 additional seconds</div>
+                <div class = "choice" id = "c">Every incorrect answer will subtract 5 additional seconds</div>
                 <div class = "choice" id = "d">The game is over after the last question or the time runs out.</div>
             </div>
-            <p id = "result"></p>
-            <button id = "start">START</button>
+            <div>
+                <p id = "result"></p>
+                <button id = "start">START</button>
+            </div>
+            
         </div>
         
-        <div id = "results">
+        <div id = "scoreKeeper">
             <div >Correct: <span id = "correct">0</span></div>
             <div>Incorrect: <span id = "incorrect">0</span></div>
             <div>Score <span id = "score"></span></div>

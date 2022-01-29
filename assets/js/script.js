@@ -11,8 +11,8 @@ var correctEl = document.querySelector("#correct");
 var incorrectEl = document.querySelector("#incorrect");
 var scoreEl = document.querySelector("#score");
 var resultEl = document.querySelector("#result");
-var displayHighScoresEl = document.querySelector(".displayHighScores");
 var highscoresEl = document.querySelector(".highscores");
+var displayHighScoresEl = document.querySelector(".displayHighScores");
 var highScores = []
 
 
@@ -78,6 +78,10 @@ function choice(event){
         console.log("IncorrectEl",incorrectEl)
         getQuestion();
     }
+    // else if(currentQuestion > bank.length){
+    //     currentScore.player = timesUp();
+    //     currentScore.points = correctEl
+    // }
         
 };
     
@@ -94,14 +98,15 @@ function storeScore(){
     highScores.push(currentScore);
     localStorage.setItem("user", JSON.stringify(highScores));
   }
- function saveHighScore (){
+ function saveHighScore(){
      highScores = JSON.parse(localStorage.getItem('user'));
     console.log(highScores);
  }
+
 highscoresEl.addEventListener("click",function(){
     saveHighScore();
     for(i = 0; i < highScores.length; i++){
-        var player = document.createElement('li');
+        var player = document.createElement("p");
         player.innerHTML = highScores[i].player + " : " + highScores[i].points + " points";
         displayHighScoresEl.appendChild(player);
     }
