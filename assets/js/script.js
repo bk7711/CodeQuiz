@@ -14,7 +14,6 @@ var resultEl = document.querySelector("#result");
 var highscoresEl = document.querySelector(".highscores");
 var displayHighScoresEl = document.querySelector(".displayHighScores");
 var highScores = []
-var currentScore = {};
 
 
 var currentQuestion = 0;
@@ -26,8 +25,9 @@ var scoreEl = 0;
 
 //start timer
 startEl.addEventListener("click", function(){
-    
-    saveHighScore();
+    if(localStorage.length > 0) {
+        saveHighScore();
+    }
     var timerInterval = setInterval(function (){
         secondsLeft--;
         // timeEl.innerHTML = secondsLeft;
@@ -103,7 +103,10 @@ function endGame(){
 }
 //grab the final score and initials and push to highScores array and local storage
 function storeScore(){
-    var currentScore = {};
+    var currentScore = {
+        player:"",
+        points:0,
+    };
     currentScore.player=endGame().trim();
     currentScore.points= correctEl;
     highScores.push(currentScore);
@@ -116,11 +119,30 @@ function saveHighScore(){
  }
 //provide info from local storage as the highscores list
 highscoresEl.addEventListener("click",function(){
-    saveHighScore();
-    for(i = 0; i < highScores.length; i++){
-        var player = document.createElement("p");
-        player.innerHTML = highScores[i].player + " : " + highScores[i].points + " points";
-        displayHighScoresEl.appendChild(player);
+    if(localStorage.length > 0){
+        saveHighScore();
+        for(i = 0; i < highScores.length; i++){
+            var player = document.createElement("p");
+            player.setAttribute("class", "storedScore")
+            //add button to close highscores
+            var button = document.createElement("btn");
+            player.innerHTML = highScores[i].player + " : " + highScores[i].points + " points";
+            
+            displayHighScoresEl.appendChild(player);
+            
+        }
+        button.innerHTML = "Close"
+        displayHighScoresEl.appendChild(button);
+        displayHighScoresEl.setAttribute("style", "display:block;");
+
+        var closeEl = document.querySelector("btn");
+        closeEl.addEventListener("click", function(){
+            displayHighScoresEl.setAttribute("style", "display:none;");
+            displayHighScoresEl.remove();
+        })
     }
-    displayHighScoresEl.setAttribute("style", "display:block;");
-});
+    else{
+        alert("There are no highscores");
+    }
+})
+    

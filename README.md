@@ -12,3 +12,6 @@ https://bk7711.github.io/onlineQuiz/ - Online Quiz Site
 Below is a preview of the html:
 
 ![HTML snippet](assets/images/webpage.png)
+
+## Contributions
+The questions were borrowed from http://mcqspdfs.blogspot.com/2013/08/60-top-javascript-multiple-choice.html .
