@@ -50,15 +50,15 @@ var bank = [
         },
     correctAnswer: "b"
     },
-    {question: "What is the correct syntax for referring to an external script called ' abc.js'?",
-    answers:{
-            a:"A. <script href=' abc.js'>",
-            b:"B. <script name=' abc.js'>",
-            c:"C. <script src=' abc.js'>",
-            d:"D. None of the above",
-        },
-    correctAnswer: "c"
-    },
+    // {question: "What is the correct syntax for referring to an external script called ' abc.js'?",
+    // answers:{
+    //         a:"A. <script href=' abc.js'>",
+    //         b:"B. <script name=' abc.js'>",
+    //         c:"C. <script src=' abc.js'>",
+    //         d:"D. None of the above",
+    //     },
+    // correctAnswer: "c"
+    // },
     {question: "Which types of image maps can be used with JavaScript?",
     answers:{
             a:"A.  Server-side image maps",

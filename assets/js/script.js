@@ -12,9 +12,10 @@ var incorrectEl = document.querySelector("#incorrect");
 var scoreEl = document.querySelector("#score");
 var resultEl = document.querySelector("#result");
 var highscoresEl = document.querySelector(".highscores");
+var highScores = []
+
 
 var currentQuestion = 0;
-
 var secondsLeft = 90;
 
 var correctEl=0;
@@ -23,13 +24,13 @@ var scoreEl = 0;
 
 //start timer
 startEl.addEventListener("click", function(){
-
+    saveHighScore();
     var timerInterval = setInterval(function (){
         secondsLeft--;
         // timeEl.innerHTML = secondsLeft;
         document.getElementById("timer").innerHTML = secondsLeft;
-        if(secondsLeft <= 0){
-            alert(`Your time is up. Here is your score ${(correctEl/11)*100} % `);
+        if(secondsLeft <= 0 || currentQuestion === bank.length){
+            storeScore();
             clearInterval(timerInterval);
         }
 
@@ -41,6 +42,9 @@ startEl.addEventListener("click", function(){
 //post a question
 function getQuestion(){
     var q = bank[currentQuestion];
+    resultEl.innerHTML = " ";
+    
+    if(currentQuestion < bank.length){
     questionsEl.innerHTML = "<p>" + q.question + "<p>";
     choiceA.innerHTML = q.answers.a;
     choiceA.addEventListener("click",choice);
@@ -50,27 +54,51 @@ function getQuestion(){
     choiceC.addEventListener("click", choice);
     choiceD.innerHTML = q.answers.d;
     choiceD.addEventListener("click", choice);
-        
+    }
+    // else{
+    //     storeScore();
+    // }     
 }
+
 function choice(event){
     if(event.target.id == bank[currentQuestion].correctAnswer){
         correctEl++;
         currentQuestion++;
         resultEl.innerHTML = "Correct";
+
         console.log("correctEl",correctEl)
         getQuestion();
         
     }else if(event.target.id !== bank[currentQuestion].correctAnswer){
-        secondsLeft-=10;
+        secondsLeft-=3;
         incorrectEl++;
         resultEl.innerHTML = "Wrong";
         currentQuestion++;
         console.log("IncorrectEl",incorrectEl)
         getQuestion();
-    }else if(currentQuestion > bank.length){
-        alert(`Game over. Here is your score ${(correctEl/11)*100} % `);
     }
+    // else if(currentQuestion > bank.length){
+    //     currentScore.player = timesUp();
+    //     currentScore.points = correctEl
+    // }
         
 };
     
-  
+function endGame(){
+    
+    var initials = prompt(`Game over. You scored ${correctEl} points. Enter your initials.`);
+    return initials;
+}
+
+function storeScore(){
+    var currentScore = {};
+    currentScore.player=endGame().trim();
+    currentScore.points= correctEl;
+    highScores.push(currentScore);
+    localStorage.setItem("user", JSON.stringify(highScores));
+  }
+ function saveHighScore (){
+     highScore = JSON.parse(localStorage.getItem('user'));
+    console.log(highScore);
+ }
+highscoresEl.addEventListener("click",saveHighScore());
